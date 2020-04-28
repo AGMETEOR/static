@@ -3,10 +3,15 @@ pipeline {
     stages {
         stage('Upload to AWS') {
             steps {
-                
-                withAWS(region:'us-east-1', credentials:'aws-creds') {
-                    s3Upload(file:'index.html', bucket:'jenkins-code', path:'')
-                }
+                sh 'echo "Hello World"'
+                sh '''
+                echo "Multiline shell steps"
+                ls -lah
+                '''
+
+            withAWS(region:'us-east-1', credentials:'aws-creds') {
+                s3Upload(file:'index.html', bucket:'jenkins-code', path:'')
+            }
             }
         }
     }
